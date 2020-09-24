@@ -3,7 +3,7 @@
 using namespace std;
 bool legalMove(char board[3][3], char marker[2]);
 bool checkWin(char board[3][3]);
-//char [3][3] placeMarker(char board[3][3], char marker[2]);
+void placeMarker(char &board[3][3], char marker[2], bool turn);
 
 void printBoard(char board[3][3]);
 int main(){
@@ -17,7 +17,7 @@ int main(){
     }
   }
   printBoard(board);
-  cout << "welcome to tictactoe! input your moves in the format a0, b1, etc." << endl;
+  cout << "welcome to tictactoe! input your moves in the format A0, B1, etc." << endl;
   
   while(true){
     cout << "input your move: " << endl;
@@ -31,6 +31,8 @@ int main(){
       cout << "wrong format move" << endl;
     }
   }
+  placeMarker(&board, move, p1turn);
+  printBoard(board);
 }
 
 bool legalMove(char board[3][3], char marker[2]){
@@ -43,14 +45,22 @@ bool checkWin(char board[3][3]){
   return true; 
 }
 
-//char [3][3] placeMarker(char board[3][3], char marker[2]){
-  //place the marker
-//}
-
+void placeMarker(char& board[3][3], char marker[3], bool p1turn){
+  //places a marker in the spot
+  int x = int(marker[0])-65;
+  int y = int(marker)- 48;
+  if(p1turn){
+    board[y][x] = 'X';
+  }
+  else{
+    board[y][x] = 'O';
+  }
+  p1turn = !p1turn;
+}
 void printBoard(char board[3][3]){
   char line[5];
   line[4] = '\0';
-  cout << " abc" << endl;
+  cout << " ABC" << endl;
   for(int a = 0; a < 3; a++){
     line[0] = char(a+48);
     for(int b = 0; b < 3; b++){
