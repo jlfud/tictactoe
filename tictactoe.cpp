@@ -3,7 +3,7 @@
 using namespace std;
 bool legalMove(char board[3][3], char marker[2]);
 bool checkWin(char board[3][3]);
-void placeMarker(char &board[3][3], char marker[2], bool turn);
+void placeMarker(char (&board)[3][3], char marker[2], bool turn);
 
 void printBoard(char board[3][3]);
 int main(){
@@ -24,14 +24,13 @@ int main(){
     cin.get(move,3);
     cin.get();
     if(legalMove(board, move)){
-      cout << move <<endl;
       break;
     }
     else{
       cout << "wrong format move" << endl;
     }
   }
-  placeMarker(&board, move, p1turn);
+  placeMarker(board, move, p1turn);
   printBoard(board);
 }
 
@@ -45,10 +44,10 @@ bool checkWin(char board[3][3]){
   return true; 
 }
 
-void placeMarker(char& board[3][3], char marker[3], bool p1turn){
+void placeMarker(char (&board)[3][3], char marker[3], bool p1turn){
   //places a marker in the spot
   int x = int(marker[0])-65;
-  int y = int(marker)- 48;
+  int y = int(marker[1])- 48;
   if(p1turn){
     board[y][x] = 'X';
   }
