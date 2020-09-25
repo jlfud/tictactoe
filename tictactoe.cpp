@@ -4,8 +4,8 @@ using namespace std;
 bool legalMove(char board[3][3], char marker[2]);
 bool checkWin(char board[3][3]);
 void placeMarker(char (&board)[3][3], char marker[2], bool turn);
-
 void printBoard(char board[3][3]);
+void clearBoard(char (&board)[3][3]);
 int main(){
   
   char board[3][3];
@@ -25,14 +25,11 @@ int main(){
     if(legalMove(board, move)){
       break;
     }
-    else{
-      cout << "wrong format move" << endl;
-    }
   }
   if(legalMove(board, move)){
       placeMarker(board, move, p1turn);
       printBoard(board);
-   }
+  }
 }
 
 bool legalMove(char board[3][3], char marker[2]){
@@ -76,5 +73,12 @@ void printBoard(char board[3][3]){
       line[b+1] = board[a][b];
     }
     cout << line << endl;
+  }
+}
+void clearBoard(char (&board)[3][3]){
+  for(int a = 0; a < 3; a ++){
+    for(int b = 0; b < 3; b++){
+      board[b][a] = ' ';
+    }
   }
 }
