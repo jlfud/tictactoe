@@ -16,9 +16,8 @@ int main(){
       board[a][b] = ' '; 
     }
   }
-  printBoard(board);
   cout << "welcome to tictactoe! input your moves in the format A0, B1, etc." << endl;
-  
+  printBoard(board);
   while(true){
     cout << "input your move: " << endl;
     cin.get(move,3);
@@ -50,6 +49,8 @@ void placeMarker(char (&board)[3][3], char marker[3], bool p1turn){
   int y = int(marker[1])- 48;
   if(p1turn){
     board[y][x] = 'X';
+    cout << "here!" << endl;
+    cout << y << " " << x << endl;
   }
   else{
     board[y][x] = 'O';
