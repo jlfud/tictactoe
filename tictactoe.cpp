@@ -29,13 +29,24 @@ int main(){
       cout << "wrong format move" << endl;
     }
   }
-  placeMarker(board, move, p1turn);
-  printBoard(board);
+  if(legalMove(board, move)){
+      placeMarker(board, move, p1turn);
+      printBoard(board);
+   }
 }
 
 bool legalMove(char board[3][3], char marker[2]){
-  //check if the input is a legal move
-  return true;
+  if((int)marker[1] >= 48 && (int)marker[1] <= 50){
+    if((int)marker[0] >= 65 && (int)marker[0] <= 67){
+      int x = int(marker[0])-65;
+      int y = int(marker[1])-48;
+      if(board[y][x] == ' '){
+	return true;
+      }
+    }
+  }
+  cout << "invalid move or space taken! please input in form A1!" << endl;
+  return false;
 }
 
 bool checkWin(char board[3][3]){
@@ -49,8 +60,6 @@ void placeMarker(char (&board)[3][3], char marker[3], bool p1turn){
   int y = int(marker[1])- 48;
   if(p1turn){
     board[y][x] = 'X';
-    cout << "here!" << endl;
-    cout << y << " " << x << endl;
   }
   else{
     board[y][x] = 'O';
