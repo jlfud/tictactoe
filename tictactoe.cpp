@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 bool legalMove(char board[3][3], char marker[2]);
@@ -30,6 +31,7 @@ int main(){
       placeMarker(board, move, p1turn);
       printBoard(board);
   }
+  return 0; 
 }
 
 bool legalMove(char board[3][3], char marker[2]){
@@ -47,8 +49,52 @@ bool legalMove(char board[3][3], char marker[2]){
 }
 
 bool checkWin(char board[3][3]){
-  //check for wins or ties
-  return true; 
+  for(int a = 0; a < 3; a++){
+    if(board[a][0] == board[a][1] && board[a][1] == board[a][2]){
+      return true;
+    }
+  }
+  for(int a = 0; a < 3; a++){
+    if(board[0][a] == board[1][a] && board[1][a] == board[2][a]){
+      return true;
+    }
+  }
+  int diagonolWin = 0;
+  char player;
+  for(int i = 0; i < 2; i++){
+    if(i == 0){
+      player = 'X';
+    }
+    else{
+      player = 'O';
+    }
+    for(int a = 0; a < 3; a++){
+      if(board[a][a] == player){
+	diagonolWin++;
+      }
+    }
+    if(diagonolWin == 3){
+      return true;
+    }
+  }
+   diagonolWin = 0;
+   for(int i = 0; i < 2; i++){
+     if(i == 0){
+       player = 'X';
+     }
+     else{
+       player = 'O';
+     }
+     for(int a= 0; a < 3; a++){
+	if(board[a][abs(a-2)] == player){
+	  diagonolWin++;
+        }
+     }
+     if(diagonolWin == 3){
+       return true;
+     }
+   }
+   return false; 
 }
 
 void placeMarker(char (&board)[3][3], char marker[3], bool p1turn){
