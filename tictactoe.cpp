@@ -40,7 +40,24 @@ int main(){
       else{
 	cout << "player 1 wins!" << endl;
       }
-      break;
+      char playAgain[2];
+      cout << "play again? (y/n)" << endl;
+      cin.get(playAgain, 2);
+      cin.get();
+      if(playAgain[0] == 'y'){
+	clearBoard(board);
+	printBoard(board);
+	p1turn = true;
+	break;
+      }
+      else if(playAgain[0] == 'n'){
+	cout << "bye." << endl;
+	return 0;
+      }
+      else{
+	cout << "response not recognized!" << endl;
+	return 0;
+      }
     }
   }
   return 0; 
