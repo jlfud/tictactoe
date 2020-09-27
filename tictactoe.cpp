@@ -20,16 +20,28 @@ int main(){
   cout << "welcome to tictactoe! input your moves in the format A0, B1, etc." << endl;
   printBoard(board);
   while(true){
-    cout << "input your move: " << endl;
-    cin.get(move,3);
-    cin.get();
+    while(true){
+      cout << "input your move: " << endl;
+      cin.get(move,3);
+      cin.get();
+      if(legalMove(board, move)){
+	break;
+      }
+    }
     if(legalMove(board, move)){
+      placeMarker(board, move, p1turn);
+      p1turn = !p1turn;
+      printBoard(board);
+    }
+    if(checkWin(board)){
+      if(p1turn){
+	cout << "player 2 wins!" << endl;
+      }
+      else{
+	cout << "player 1 wins!" << endl;
+      }
       break;
     }
-  }
-  if(legalMove(board, move)){
-      placeMarker(board, move, p1turn);
-      printBoard(board);
   }
   return 0; 
 }
@@ -50,12 +62,12 @@ bool legalMove(char board[3][3], char marker[2]){
 
 bool checkWin(char board[3][3]){
   for(int a = 0; a < 3; a++){
-    if(board[a][0] == board[a][1] && board[a][1] == board[a][2]){
+    if(board[a][0] == board[a][1] && board[a][1] == board[a][2] && board[a][0] != ' '){
       return true;
     }
   }
   for(int a = 0; a < 3; a++){
-    if(board[0][a] == board[1][a] && board[1][a] == board[2][a]){
+    if(board[0][a] == board[1][a] && board[1][a] == board[2][a] && board[0][a] != ' '){
       return true;
     }
   }
@@ -77,24 +89,24 @@ bool checkWin(char board[3][3]){
       return true;
     }
   }
-   diagonolWin = 0;
-   for(int i = 0; i < 2; i++){
-     if(i == 0){
-       player = 'X';
-     }
-     else{
-       player = 'O';
-     }
-     for(int a= 0; a < 3; a++){
-	if(board[a][abs(a-2)] == player){
-	  diagonolWin++;
-        }
-     }
-     if(diagonolWin == 3){
-       return true;
-     }
-   }
-   return false; 
+  diagonolWin = 0;
+  for(int i = 0; i < 2; i++){
+    if(i == 0){
+      player = 'X';
+    }
+    else{
+      player = 'O';
+    }
+    for(int a= 0; a < 3; a++){
+       if(board[a][abs(a-2)] == player){
+	 diagonolWin++;
+       }
+    }
+    if(diagonolWin == 3){
+      return true;
+    }
+  }
+  return false; 
 }
 
 void placeMarker(char (&board)[3][3], char marker[3], bool p1turn){
@@ -107,7 +119,6 @@ void placeMarker(char (&board)[3][3], char marker[3], bool p1turn){
   else{
     board[y][x] = 'O';
   }
-  p1turn = !p1turn;
 }
 void printBoard(char board[3][3]){
   char line[5];
