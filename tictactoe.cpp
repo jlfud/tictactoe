@@ -44,6 +44,7 @@ int main(){
      }
     else if(checkTie(board)){
       cout << "tie!" << endl;
+      gameOver = true;
     }
     //if win or tie, prompts the user for play again
     if(gameOver){
@@ -55,7 +56,7 @@ int main(){
 	clearBoard(board);
 	printBoard(board);
 	p1turn = true;
-	break;
+	gameOver = false;
       }
       else if(playAgain[0] == 'n'){
 	cout << "bye." << endl;
@@ -116,6 +117,7 @@ bool checkWin(char board[3][3]){
       player = 'X';
     }
     else{
+      diagonolWin = 0;
       player = 'O';
     }
     for(int a = 0; a < 3; a++){
@@ -133,6 +135,7 @@ bool checkWin(char board[3][3]){
       player = 'X';
     }
     else{
+      diagonolWin = 0;
       player = 'O';
     }
     for(int a= 0; a < 3; a++){
@@ -141,7 +144,6 @@ bool checkWin(char board[3][3]){
        }
     }
     if(diagonolWin == 3){
-      cout << "diagonol win 2" << endl;
       return true;
     }
   }
